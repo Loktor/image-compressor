@@ -1,6 +1,6 @@
 {
   "name": "@xkeshi/image-compressor",
-  "version": "0.5.3",
+  "version": "0.6.0",
   "description": "A simple JavaScript image compressor.",
   "main": "dist/image-compressor.common.js",
   "module": "dist/image-compressor.esm.js",
