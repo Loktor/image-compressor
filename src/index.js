@@ -245,9 +245,10 @@ export default class ImageCompressor {
 
         if (result) {
           // Returns original file if the result is greater than it and without size related options
-          if (result.size > file.size && !(
+          if ((result.size > file.size && !(
               options.width > naturalWidth || options.height > naturalHeight ||
-              options.minWidth > naturalWidth || options.minHeight > naturalHeight)
+              options.minWidth > naturalWidth || options.minHeight > naturalHeight) && !options.scaleAndCenterCrop)
+          // if we scale and crop then we don't want to return the old file since the new one always has the preferred size
           ) {
             result = file;
           } else {

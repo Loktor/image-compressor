@@ -1,6 +1,6 @@
 {
   "name": "@doctorloktor/image-compressor-cropper",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "A simple JavaScript image compressor.",
   "main": "dist/image-compressor.common.js",
   "module": "dist/image-compressor.esm.js",
