@@ -1,11 +1,11 @@
 /*!
- * Image Compressor v0.5.3
- * https://github.com/xkeshi/image-compressor
+ * Image Compressor v0.6.1
+ * https://github.com/Loktor/image-compressor
  *
  * Copyright (c) 2018 Xkeshi
  * Released under the MIT license
  *
- * Date: 2018-01-11T14:19:32.993Z
+ * Date: 2018-01-11T15:13:51.876Z
  */
 
 'use strict';

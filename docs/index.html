@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:v-bind="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -121,8 +121,8 @@
               <div class="col-sm-8">
                 <select class="form-control" name="scaleAndCenterCrop" id="scaleAndCenterCrop"
                         v-model.number="options.scaleAndCenterCrop">
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
+                  <option v-bind:value="true" value="true">Yes</option>
+                  <option v-bind:value="false" value="false">No</option>
                 </select>
               </div>
             </div>
