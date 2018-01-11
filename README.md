@@ -1,10 +1,13 @@
 # image-compressor
 
-[![Downloads](https://img.shields.io/npm/dm/@xkeshi/image-compressor.svg)](https://www.npmjs.com/package/@xkeshi/image-compressor) [![Version](https://img.shields.io/npm/v/@xkeshi/image-compressor.svg)](https://www.npmjs.com/package/@xkeshi/image-compressor)
+[![Downloads](https://img.shields.io/npm/dm/@doctorloktor/image-compressor-cropper.svg)](https://www.npmjs.com/package/@doctorloktor/image-compressor-cropper) [![Version](https://img.shields.io/npm/v/@doctorloktor/image-compressor-cropper.svg)](https://www.npmjs.com/package/@doctorloktor/image-compressor-cropper)
 
 > A simple JavaScript image compressor. Uses the Browser's native [canvas.toBlob](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob) API to do the compression work. General use this to precompress a client image file before upload it.
 
+This version is based upon the [xkeshi's version](https://github.com/xkeshi/image-compressor)
+
 - Original: [Website](https://xkeshi.github.io/image-compressor)
+- Version with center cropping feature: [Website](https://loktor.github.io/image-compressor/)
 
 ## Table of contents
 
