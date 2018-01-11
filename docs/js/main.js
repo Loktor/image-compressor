@@ -15,9 +15,10 @@ window.addEventListener('DOMContentLoaded', function () {
           maxHeight: undefined,
           minWidth: 0,
           minHeight: 0,
-          width: undefined,
-          height: undefined,
+          width: 500,
+          height: 500,
           quality: 0.8,
+          scaleAndCenterCrop: true,
           mimeType: '',
           convertSize: 5000000,
           success: function (file) {
@@ -78,11 +79,11 @@ window.addEventListener('DOMContentLoaded', function () {
         this.compress(e.target.files ? e.target.files[0] : null);
       },
 
-      dragover: function(e) {
+      dragover: function (e) {
         e.preventDefault();
       },
 
-      drop: function(e) {
+      drop: function (e) {
         e.preventDefault();
         this.compress(e.dataTransfer.files ? e.dataTransfer.files[0] : null);
       },

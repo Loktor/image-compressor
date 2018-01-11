@@ -7,6 +7,14 @@ export default {
   checkOrientation: true,
 
   /**
+   * Indicates if the image should be scale to the specified width/height
+   * and cropped to the center
+   * Requires width/height to be set
+   * @type {boolean}
+   */
+  scaleAndCenterCrop: false,
+
+  /**
    * The max width of the output image.
    * @type {number}
    */

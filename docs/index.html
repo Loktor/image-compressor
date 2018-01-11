@@ -11,174 +11,197 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
 </head>
 <body>
-  <header class="navbar navbar-light navbar-expand-md">
-    <nav class="container">
-      <a class="navbar-brand" href="./">image-compressor</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbar-collapse" role="navigation">
-        <nav class="nav navbar-nav">
-          <a class="nav-link" href="https://github.com/xkeshi/image-compressor/blob/master/README.md">Docs</a>
-          <a class="nav-link" href="https://github.com/xkeshi/image-compressor/blob/master/LICENSE">License</a>
-          <a class="nav-link" href="https://github.com/xkeshi/image-compressor" title="View the GitHub project">GitHub</a>
-          <a class="nav-link" href="https://github.com/xkeshi" title="About the author">About</a>
-        </nav>
-      </div>
-    </nav>
-  </header>
-
-  <div class="jumbotron rounded-0 bg-primary text-white">
-    <div class="container">
-      <h1>image-compressor <small class="h6">v0.5.3</small></h1>
-      <p class="lead mb-0">A simple JavaScript image compressor.</p>
+<header class="navbar navbar-light navbar-expand-md">
+  <nav class="container">
+    <a class="navbar-brand" href="./">image-compressor</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapse"
+            aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbar-collapse" role="navigation">
+      <nav class="nav navbar-nav">
+        <a class="nav-link" href="https://github.com/xkeshi/image-compressor/blob/master/README.md">Docs</a>
+        <a class="nav-link" href="https://github.com/xkeshi/image-compressor/blob/master/LICENSE">License</a>
+        <a class="nav-link" href="https://github.com/xkeshi/image-compressor" title="View the GitHub project">GitHub</a>
+        <a class="nav-link" href="https://github.com/xkeshi" title="About the author">About</a>
+      </nav>
     </div>
-  </div>
+  </nav>
+</header>
 
+<div class="jumbotron rounded-0 bg-primary text-white">
   <div class="container">
-    <h3>Example</h3>
-    <hr>
-    <div id="app">
-      <div class="card bg-light mb-4" @change="change" @dragover="dragover" @drop="drop">
-        <div class="card-body">
-          <div class="p-5 text-center">Drop image here or <input type="file" id="file" accept="image/jpeg,image/jpg,image/jpe,image/png,image/gif,image/webp,image/bmp,image/tiff" ref="input"></div>
+    <h1>image-compressor
+      <small class="h6">v0.5.3</small>
+    </h1>
+    <p class="lead mb-0">A simple JavaScript image compressor.</p>
+  </div>
+</div>
+
+<div class="container">
+  <h3>Example</h3>
+  <hr>
+  <div id="app">
+    <div class="card bg-light mb-4" @change="change" @dragover="dragover" @drop="drop">
+      <div class="card-body">
+        <div class="p-5 text-center">Drop image here or <input type="file" id="file"
+                                                               accept="image/jpeg,image/jpg,image/jpe,image/png,image/gif,image/webp,image/bmp,image/tiff"
+                                                               ref="input"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Options</h3>
+            <hr>
+            <div class="form-group row">
+              <label for="inputMaxWidth" class="col-sm-4 col-form-label">maxWidth</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" id="inputMaxWidth" placeholder="Infinity"
+                       v-model.number="options.maxWidth">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputMaxHeight" class="col-sm-4 col-form-label">maxHeight</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" id="inputMaxHeight" placeholder="Infinity"
+                       v-model.number="options.maxHeight">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputMinWidth" class="col-sm-4 col-form-label">minWidth</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" id="inputMinWidth" placeholder="0"
+                       v-model.number="options.minWidth">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputMinHeight" class="col-sm-4 col-form-label">minHeight</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" id="inputMinHeight" placeholder="0"
+                       v-model.number="options.minHeight">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputWidth" class="col-sm-4 col-form-label">width</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" id="inputWidth" placeholder="undefined"
+                       v-model.number="options.width">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputHeight" class="col-sm-4 col-form-label">height</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" id="inputHeight" placeholder="undefined"
+                       v-model.number="options.height">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputQuality" class="col-sm-4 col-form-label">quality</label>
+              <div class="col-sm-8">
+                <select class="form-control" name="quality" id="inputQuality" v-model.number="options.quality">
+                  <option value="0">0</option>
+                  <option value="0.1">0.1</option>
+                  <option value="0.2">0.2</option>
+                  <option value="0.3">0.3</option>
+                  <option value="0.4">0.4</option>
+                  <option value="0.5">0.5</option>
+                  <option value="0.6">0.6</option>
+                  <option value="0.7">0.7</option>
+                  <option value="0.8">0.8</option>
+                  <option value="0.9">0.9</option>
+                  <option value="1">1</option>
+                  <option value="">NaN</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="scaleAndCenterCrop" class="col-sm-4 col-form-label">scaleAndCenterCrop</label>
+              <div class="col-sm-8">
+                <select class="form-control" name="scaleAndCenterCrop" id="scaleAndCenterCrop"
+                        v-model.number="options.scaleAndCenterCrop">
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputMimeType" class="col-sm-4 col-form-label">mimeType</label>
+              <div class="col-sm-8">
+                <input type="text" class="form-control" id="inputMimeType" placeholder="auto"
+                       v-model.number="options.mimeType">
+              </div>
+            </div>
+            <div class="form-group row">
+              <label for="inputConvertSize" class="col-sm-4 col-form-label">convertSize</label>
+              <div class="col-sm-8">
+                <input type="number" class="form-control" id="inputConvertSize" placeholder="5000000"
+                       v-model.number="options.convertSize">
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <h3 class="card-title">Options</h3>
-              <hr>
-              <div class="form-group row">
-                <label for="inputMaxWidth" class="col-sm-4 col-form-label">maxWidth</label>
-                <div class="col-sm-8">
-                  <input type="number" class="form-control" id="inputMaxWidth" placeholder="Infinity" v-model.number="options.maxWidth">
+      <div class="col-md-8 mb-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h3 class="card-title">Input (original)</h3>
+            <hr>
+            <div class="row">
+              <div class="col-md-4 d-flex">
+                <div class="w-100 text-center" v-if="inputURL">
+                  <img class="mw-100" :src="inputURL" :alt="input.name">
                 </div>
+                <div v-else class="w-100 bg-light"></div>
               </div>
-              <div class="form-group row">
-                <label for="inputMaxHeight" class="col-sm-4 col-form-label">maxHeight</label>
-                <div class="col-sm-8">
-                  <input type="number" class="form-control" id="inputMaxHeight" placeholder="Infinity" v-model.number="options.maxHeight">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputMinWidth" class="col-sm-4 col-form-label">minWidth</label>
-                <div class="col-sm-8">
-                  <input type="number" class="form-control" id="inputMinWidth" placeholder="0" v-model.number="options.minWidth">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputMinHeight" class="col-sm-4 col-form-label">minHeight</label>
-                <div class="col-sm-8">
-                  <input type="number" class="form-control" id="inputMinHeight" placeholder="0" v-model.number="options.minHeight">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputWidth" class="col-sm-4 col-form-label">width</label>
-                <div class="col-sm-8">
-                  <input type="number" class="form-control" id="inputWidth" placeholder="undefined" v-model.number="options.width">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputHeight" class="col-sm-4 col-form-label">height</label>
-                <div class="col-sm-8">
-                  <input type="number" class="form-control" id="inputHeight" placeholder="undefined" v-model.number="options.height">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputQuality" class="col-sm-4 col-form-label">quality</label>
-                <div class="col-sm-8">
-                  <select class="form-control" name="quality" id="inputQuality" v-model.number="options.quality">
-                    <option value="0">0</option>
-                    <option value="0.1">0.1</option>
-                    <option value="0.2">0.2</option>
-                    <option value="0.3">0.3</option>
-                    <option value="0.4">0.4</option>
-                    <option value="0.5">0.5</option>
-                    <option value="0.6">0.6</option>
-                    <option value="0.7">0.7</option>
-                    <option value="0.8">0.8</option>
-                    <option value="0.9">0.9</option>
-                    <option value="1">1</option>
-                    <option value="">NaN</option>
-                  </select>
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputMimeType" class="col-sm-4 col-form-label">mimeType</label>
-                <div class="col-sm-8">
-                  <input type="text" class="form-control" id="inputMimeType" placeholder="auto" v-model.number="options.mimeType">
-                </div>
-              </div>
-              <div class="form-group row">
-                <label for="inputConvertSize" class="col-sm-4 col-form-label">convertSize</label>
-                <div class="col-sm-8">
-                  <input type="number" class="form-control" id="inputConvertSize" placeholder="5000000" v-model.number="options.convertSize">
-                </div>
+              <div class="col-md-8">
+                <dl class="row">
+                  <dt class="col-sm-4">lastModified:</dt>
+                  <dd class="col-sm-8">{{ input.lastModified || 'N/A' }}</dd>
+                  <dt class="col-sm-4">lastModifiedDate:</dt>
+                  <dd class="col-sm-8">{{ input.lastModifiedDate || 'N/A' }}</dd>
+                  <dt class="col-sm-4">name:</dt>
+                  <dd class="col-sm-8">{{ input.name || 'N/A' }}</dd>
+                  <dt class="col-sm-4">type:</dt>
+                  <dd class="col-sm-8">{{ input.type || 'N/A' }}</dd>
+                  <dt class="col-sm-4">size:</dt>
+                  <dd class="col-sm-8">{{ input.size | prettySize }}</dd>
+                </dl>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-md-8 mb-4">
-          <div class="card mb-4">
-            <div class="card-body">
-              <h3 class="card-title">Input (original)</h3>
-              <hr>
-              <div class="row">
-                <div class="col-md-4 d-flex">
-                  <div class="w-100 text-center" v-if="inputURL">
-                    <img class="mw-100" :src="inputURL" :alt="input.name">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title">Output (compressed)</h3>
+            <hr>
+            <div class="row">
+              <div class="col-md-4 d-flex justify-content-center">
+                <div class="w-100 text-center" v-if="outputURL">
+                  <img class="mw-100" :src="outputURL" :alt="output.name">
+                  <div class="mt-2">
+                    <a class="btn btn-sm btn-blocks btn-outline-primary mt-2" :download="output.name" :href="outputURL"
+                       title="Download the compressed image">Download</a>
                   </div>
-                  <div v-else class="w-100 bg-light"></div>
                 </div>
-                <div class="col-md-8">
-                  <dl class="row">
-                    <dt class="col-sm-4">lastModified:</dt>
-                    <dd class="col-sm-8">{{ input.lastModified || 'N/A' }}</dd>
-                    <dt class="col-sm-4">lastModifiedDate:</dt>
-                    <dd class="col-sm-8">{{ input.lastModifiedDate || 'N/A' }}</dd>
-                    <dt class="col-sm-4">name:</dt>
-                    <dd class="col-sm-8">{{ input.name || 'N/A' }}</dd>
-                    <dt class="col-sm-4">type:</dt>
-                    <dd class="col-sm-8">{{ input.type || 'N/A' }}</dd>
-                    <dt class="col-sm-4">size:</dt>
-                    <dd class="col-sm-8">{{ input.size | prettySize }}</dd>
-                  </dl>
-                </div>
+                <div v-else class="w-100 bg-light"></div>
               </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-body">
-              <h3 class="card-title">Output (compressed)</h3>
-              <hr>
-              <div class="row">
-                <div class="col-md-4 d-flex justify-content-center">
-                  <div class="w-100 text-center" v-if="outputURL">
-                    <img class="mw-100" :src="outputURL" :alt="output.name">
-                    <div class="mt-2">
-                      <a class="btn btn-sm btn-blocks btn-outline-primary mt-2" :download="output.name" :href="outputURL" title="Download the compressed image">Download</a>
-                    </div>
-                  </div>
-                  <div v-else class="w-100 bg-light"></div>
-                </div>
-                <div class="col-md-8">
-                  <dl class="row">
-                    <dt class="col-sm-4">lastModified:</dt>
-                    <dd class="col-sm-8">{{ output.lastModified || 'N/A' }}</dd>
-                    <dt class="col-sm-4">lastModifiedDate:</dt>
-                    <dd class="col-sm-8">{{ output.lastModifiedDate || 'N/A' }}</dd>
-                    <dt class="col-sm-4">name:</dt>
-                    <dd class="col-sm-8">{{ output.name || 'N/A' }}</dd>
-                    <dt class="col-sm-4">type:</dt>
-                    <dd class="col-sm-8">{{ output.type || 'N/A' }}</dd>
-                    <dt class="col-sm-4">size:</dt>
-                    <dd class="col-sm-8">{{ output.size | prettySize }}
-                      <span v-if="output.size">({{ ((1 - (output.size / input.size)) * 100).toFixed(2) }}% off)</span>
-                    </dd>
-                  </dl>
-                </div>
+              <div class="col-md-8">
+                <dl class="row">
+                  <dt class="col-sm-4">lastModified:</dt>
+                  <dd class="col-sm-8">{{ output.lastModified || 'N/A' }}</dd>
+                  <dt class="col-sm-4">lastModifiedDate:</dt>
+                  <dd class="col-sm-8">{{ output.lastModifiedDate || 'N/A' }}</dd>
+                  <dt class="col-sm-4">name:</dt>
+                  <dd class="col-sm-8">{{ output.name || 'N/A' }}</dd>
+                  <dt class="col-sm-4">type:</dt>
+                  <dd class="col-sm-8">{{ output.type || 'N/A' }}</dd>
+                  <dt class="col-sm-4">size:</dt>
+                  <dd class="col-sm-8">{{ output.size | prettySize }}
+                    <span v-if="output.size">({{ ((1 - (output.size / input.size)) * 100).toFixed(2) }}% off)</span>
+                  </dd>
+                </dl>
               </div>
             </div>
           </div>
@@ -186,13 +209,14 @@
       </div>
     </div>
   </div>
+</div>
 
-  <footer></footer>
+<footer></footer>
 
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
-  <script src="https://unpkg.com/vue@2.5.13/dist/vue.min.js"></script>
-  <script src="js/image-compressor.js"></script>
-  <script src="js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/vue@2.5.13/dist/vue.min.js"></script>
+<script src="js/image-compressor.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

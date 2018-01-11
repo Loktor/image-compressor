@@ -105,6 +105,13 @@ Indicates if read the image's Exif Orientation value (JPEG image only), and then
 
 **Note:** Don't trust this all the time as some JPEG images have incorrect (not standard) Orientation values.
 
+### scaleAndCenterCrop
+
+- Type: `bool`
+- Default: `false`
+
+Indicates if the image should be scaled to the specified width/height based on the smaller value for width/height and afterwards cropped.
+
 ### maxWidth
 
 - Type: `number`

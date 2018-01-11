@@ -1,13 +1,7 @@
 import toBlob from 'blueimp-canvas-to-blob';
 import isBlob from 'is-blob';
 import DEFAULTS from './defaults';
-import {
-  isImageType,
-  imageTypeToExtension,
-  arrayBufferToDataURL,
-  getOrientation,
-  parseOrientation,
-} from './utils';
+import { arrayBufferToDataURL, getOrientation, imageTypeToExtension, isImageType, parseOrientation, } from './utils';
 
 const { ArrayBuffer, FileReader } = window;
 const URL = window.URL || window.webkitURL;
@@ -105,12 +99,12 @@ export default class ImageCompressor {
         image.src = data.url;
       }))
       .then(({
-        naturalWidth,
-        naturalHeight,
-        rotate = 0,
-        scaleX = 1,
-        scaleY = 1,
-      }) => new Promise((resolve) => {
+               naturalWidth,
+               naturalHeight,
+               rotate = 0,
+               scaleX = 1,
+               scaleY = 1,
+             }) => new Promise((resolve) => {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
         const aspectRatio = naturalWidth / naturalHeight;
@@ -168,23 +162,53 @@ export default class ImageCompressor {
           });
         }
 
-        canvas.width = width;
-        canvas.height = height;
+        if (options.scaleAndCenterCrop) {
+          width = options.width;
+          height = options.height;
+          canvas.width = width;
+          canvas.height = height;
+        } else {
+          canvas.width = width;
+          canvas.height = height;
+        }
 
         // Override the default fill color (#000, black)
         context.fillStyle = 'transparent';
         context.fillRect(0, 0, width, height);
         context.save();
-        context.translate(width / 2, height / 2);
-        context.rotate((rotate * Math.PI) / 180);
-        context.scale(scaleX, scaleY);
-        context.drawImage(
-          image,
-          Math.floor(destX),
-          Math.floor(destY),
-          Math.floor(destWidth),
-          Math.floor(destHeight),
-        );
+
+        if (options.scaleAndCenterCrop) {
+          let scaleFactorX = naturalWidth / width;
+          let scaleFactorY = naturalHeight / height;
+
+          let scaleFactor = scaleFactorX > scaleFactorY ? scaleFactorY : scaleFactorX;
+
+          let sourceWidthCrop = width * scaleFactor;
+          let sourceHeightCrop = height * scaleFactor;
+
+          context.drawImage(
+            image,
+            Math.floor((naturalWidth - sourceWidthCrop) / 2),
+            Math.floor((naturalHeight - sourceHeightCrop) / 2),
+            Math.floor(sourceWidthCrop),
+            Math.floor(sourceHeightCrop),
+            Math.floor(0),
+            Math.floor(0),
+            Math.floor(width),
+            Math.floor(height),
+          );
+        } else {
+          context.rotate((rotate * Math.PI) / 180);
+          context.translate(width / 2, height / 2);
+          context.scale(scaleX, scaleY);
+          context.drawImage(
+            image,
+            Math.floor(destX),
+            Math.floor(destY),
+            Math.floor(destWidth),
+            Math.floor(destHeight),
+          );
+        }
         context.restore();
 
         if (!isImageType(options.mimeType)) {
@@ -211,10 +235,10 @@ export default class ImageCompressor {
         }
       }))
       .then(({
-        naturalWidth,
-        naturalHeight,
-        result,
-      }) => {
+               naturalWidth,
+               naturalHeight,
+               result,
+             }) => {
         if (URL) {
           URL.revokeObjectURL(image.src);
         }
@@ -222,8 +246,8 @@ export default class ImageCompressor {
         if (result) {
           // Returns original file if the result is greater than it and without size related options
           if (result.size > file.size && !(
-            options.width > naturalWidth || options.height > naturalHeight ||
-            options.minWidth > naturalWidth || options.minHeight > naturalHeight)
+              options.width > naturalWidth || options.height > naturalHeight ||
+              options.minWidth > naturalWidth || options.minHeight > naturalHeight)
           ) {
             result = file;
           } else {
