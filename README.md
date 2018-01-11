@@ -4,7 +4,7 @@
 
 > A simple JavaScript image compressor. Uses the Browser's native [canvas.toBlob](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement/toBlob) API to do the compression work. General use this to precompress a client image file before upload it.
 
-- [Website](https://xkeshi.github.io/image-compressor)
+- Original: [Website](https://xkeshi.github.io/image-compressor)
 
 ## Table of contents
 
@@ -31,7 +31,7 @@ dist/
 ### Install
 
 ```shell
-npm install @xkeshi/image-compressor
+npm install @doctorloktor/image-compressor-cropper
 ```
 
 ### Usage

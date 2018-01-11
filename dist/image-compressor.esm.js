@@ -2,10 +2,10 @@
  * Image Compressor v0.5.3
  * https://github.com/xkeshi/image-compressor
  *
- * Copyright (c) 2017 Xkeshi
+ * Copyright (c) 2018 Xkeshi
  * Released under the MIT license
  *
- * Date: 2017-12-29T06:11:20.022Z
+ * Date: 2018-01-11T14:19:32.993Z
  */
 
 function createCommonjsModule(fn, module) {
@@ -156,6 +156,14 @@ var DEFAULTS = {
    * @type {boolean}
    */
   checkOrientation: true,
+
+  /**
+   * Indicates if the image should be scale to the specified width/height
+   * and cropped to the center
+   * Requires width/height to be set
+   * @type {boolean}
+   */
+  scaleAndCenterCrop: false,
 
   /**
    * The max width of the output image.
@@ -790,17 +798,37 @@ var ImageCompressor = function () {
             height = _width$height.height;
           }
 
-          canvas.width = width;
-          canvas.height = height;
+          if (options.scaleAndCenterCrop) {
+            width = options.width;
+            height = options.height;
+            canvas.width = width;
+            canvas.height = height;
+          } else {
+            canvas.width = width;
+            canvas.height = height;
+          }
 
           // Override the default fill color (#000, black)
           context.fillStyle = 'transparent';
           context.fillRect(0, 0, width, height);
           context.save();
-          context.translate(width / 2, height / 2);
-          context.rotate(rotate * Math.PI / 180);
-          context.scale(scaleX, scaleY);
-          context.drawImage(image, Math.floor(destX), Math.floor(destY), Math.floor(destWidth), Math.floor(destHeight));
+
+          if (options.scaleAndCenterCrop) {
+            var scaleFactorX = naturalWidth / width;
+            var scaleFactorY = naturalHeight / height;
+
+            var scaleFactor = scaleFactorX > scaleFactorY ? scaleFactorY : scaleFactorX;
+
+            var sourceWidthCrop = width * scaleFactor;
+            var sourceHeightCrop = height * scaleFactor;
+
+            context.drawImage(image, Math.floor((naturalWidth - sourceWidthCrop) / 2), Math.floor((naturalHeight - sourceHeightCrop) / 2), Math.floor(sourceWidthCrop), Math.floor(sourceHeightCrop), Math.floor(0), Math.floor(0), Math.floor(width), Math.floor(height));
+          } else {
+            context.rotate(rotate * Math.PI / 180);
+            context.translate(width / 2, height / 2);
+            context.scale(scaleX, scaleY);
+            context.drawImage(image, Math.floor(destX), Math.floor(destY), Math.floor(destWidth), Math.floor(destHeight));
+          }
           context.restore();
 
           if (!isImageType(options.mimeType)) {
@@ -876,3 +904,4 @@ var ImageCompressor = function () {
 }();
 
 export default ImageCompressor;
+//# sourceMappingURL=image-compressor.esm.js.map
